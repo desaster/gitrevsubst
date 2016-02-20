@@ -4,7 +4,8 @@ Gitrevsubst is a very simple program to add git revision to a file. The idea is 
 
 ## Example of use with Visual Studio
 
-* Add gitrevsubst.exe to your PATH
+* Add `gitrevsubst.exe` to your PATH
+* Make sure `git.exe` is in PATH as well
 * In your C# project, rename `Properties\AssemblyInfo.cs` to `AssemblyInfo.cs.tmpl`
 * Add something like this to your .tmpl file:
 ```
