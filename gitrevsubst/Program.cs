@@ -36,7 +36,7 @@ namespace gitrevsubst
             contents = contents.Replace("$GITREV$", rev);
 
             contents = contents.Replace("$GITDATE$",
-                ((DateTime) date).ToString("yyyyddMM"));
+                ((DateTime) date).ToString("yyyyMMdd"));
 
             System.IO.File.WriteAllText(outputFile, contents);
         }
