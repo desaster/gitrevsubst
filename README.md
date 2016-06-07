@@ -20,3 +20,21 @@ Gitrevsubst is a very simple program to add git revision to a file. The idea is 
 ```
 [assembly: AssemblyInformationalVersion("1.0.0.20162002-44ce0c5")]
 ```
+
+## Example with dirty status
+
+Use placeholder $GITDIRTY$ to indicate whether the build had uncommitted changes:
+```
+[assembly: AssemblyInformationalVersion("1.0.0.$GITDATE$-$GITREV$$GITDIRTY$")]
+```
+
+### Results
+Clean:
+```
+[assembly: AssemblyInformationalVersion("1.0.0.20162002-44ce0c5")]
+```
+
+Dirty (uncommitted changes to files that git is tracking):
+```
+[assembly: AssemblyInformationalVersion("1.0.0.20162002-44ce0c5-dirty")]
+```

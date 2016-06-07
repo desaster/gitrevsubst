@@ -35,6 +35,15 @@ namespace gitrevsubst
 
             contents = contents.Replace("$GITREV$", rev);
 
+            bool? dirtyStatus = git.GetDirtyStatus();
+            if (dirtyStatus == null) {
+                Console.WriteLine("Error retrieving git dirty status!");
+                Environment.Exit(2);
+            }
+
+            string dirtyString = (bool)dirtyStatus ? "-dirty" : "";
+            contents = contents.Replace("$GITDIRTY$", dirtyString);
+
             contents = contents.Replace("$GITDATE$",
                 ((DateTime) date).ToString("yyyyddMM"));
 
