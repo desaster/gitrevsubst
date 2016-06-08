@@ -25,6 +25,30 @@ namespace gitrevsubst
             return rev;
         }
 
+        public bool? GetDirtyStatus()
+        {
+            // --git-dir did not work with git describe, so temporarily change cd
+            string previousCd = Directory.GetCurrentDirectory();
+            try {
+                Directory.SetCurrentDirectory(Directory.GetParent(gitDirectory).FullName);
+                string output = this.GetGitOutput(string.Format(
+                    "describe --always --dirty",
+                    this.gitDirectory));
+
+                if (output.EndsWith("-dirty"))
+                    return true;
+                else
+                    return false;
+            } catch (Exception ex) {
+                Debug.WriteLine("Git describe failed: [{0}]", ex.Message);
+            }
+            finally {
+                Directory.SetCurrentDirectory(previousCd);
+            }
+
+            return null;
+        }
+
         public string GetLongRevId()
         {
             string rev = this.GetGitOutput(string.Format(
