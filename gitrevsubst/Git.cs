@@ -16,7 +16,7 @@ namespace gitrevsubst
         public string GetShortRevId()
         {
             string rev = this.GetGitOutput(string.Format(
-                "--git-dir {0} rev-parse --short HEAD",
+                "--git-dir {0} log -1 --format=%h --abbrev=7",
                 this.gitDirectory));
             if (rev.Length != 7) {
                 Debug.WriteLine("Revision length invalid: [{0}]", rev);
